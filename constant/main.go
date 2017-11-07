@@ -7,6 +7,12 @@ const (
 	language = "Go"
 )
 
+const (
+	A = iota
+	B = iota
+	C = iota
+)
+
 const p string = "death and taxes"
 
 func main() {
@@ -15,4 +21,7 @@ func main() {
 	fmt.Println(" q - ", q)
 	fmt.Println(" language - ", language)
 	fmt.Println(" pi - ", pi)
+	fmt.Println(" A- ", A)
+	fmt.Println(" B - ", B)
+	fmt.Println(" C - ", C)
 }
