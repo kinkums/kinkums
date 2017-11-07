@@ -8,9 +8,10 @@ const (
 )
 
 const (
-	A = iota
-	B = iota
-	C = iota
+	_  = iota
+	KB = 1 << (iota * 10)
+	MB = 1 << (iota * 10)
+	GB = 1 << (iota * 10)
 )
 
 const p string = "death and taxes"
@@ -21,7 +22,7 @@ func main() {
 	fmt.Println(" q - ", q)
 	fmt.Println(" language - ", language)
 	fmt.Println(" pi - ", pi)
-	fmt.Println(" A- ", A)
-	fmt.Println(" B - ", B)
-	fmt.Println(" C - ", C)
+	fmt.Println(" KB- ", KB)
+	fmt.Println(" MB - ", MB)
+	fmt.Println(" GB - ", GB)
 }
