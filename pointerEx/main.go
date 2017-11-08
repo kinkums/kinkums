@@ -8,4 +8,5 @@ func main() {
 	fmt.Println("Address of a is ", &a)
 	var b *int = &a
 	fmt.Println("Value of b is ", b)
+	fmt.Println("Value of *b is", *b)
 }
