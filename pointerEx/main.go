@@ -9,4 +9,6 @@ func main() {
 	var b *int = &a
 	fmt.Println("Value of b is ", b)
 	fmt.Println("Value of *b is", *b)
+	*b = 42
+	fmt.Println("New Value of a after reassigning b is ", a)
 }
