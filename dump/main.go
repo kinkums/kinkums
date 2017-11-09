@@ -47,7 +47,7 @@ func main() {
 	fmt.Println(" Value of A is ", a)*/
 
 	var input string
-	fmt.Scanln(&input)
+	fmt.Scan(&input)
 }
 
 /*func checkResponse() bool {
