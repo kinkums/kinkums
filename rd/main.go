@@ -30,9 +30,9 @@ func main() {
 			case msg2 := <-c2:
 				fmt.Print("Enter your choice (C/E) ")
 				var userInput string
-				fmt.Scan(&userInput)
+				fmt.Scan("%s", &userInput)
 				//a := checkResponse()
-				fmt.Println(" Value of UserInput is ", userInput)
+				fmt.Println(" Value of UserInput is %s", userInput)
 				fmt.Println(msg2)
 				/*if a {
 					fmt.Println(msg2)
