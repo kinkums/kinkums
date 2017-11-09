@@ -43,6 +43,7 @@ func main() {
 				if userInput == "Cont" {
 					fmt.Println(msg2)
 				} else {
+					fmt.Println("I am here, I don't know Why")
 					break
 				}
 			case msg1 := <-c1:
