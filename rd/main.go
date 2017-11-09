@@ -31,12 +31,14 @@ func main() {
 			case msg2 := <-c2:
 				fmt.Print("Do you want to continue / exit (Press C for continue, any character for exit)")
 
-				/*_, err := fmt.Scan(&userInput)
+				_, err := fmt.Scan(&userInput)
 				fmt.Println("User Input value ", userInput)
 				if err != nil {
-					log.Fatal(err)
-				}*/
-				fmt.Scan(&userInput)
+					//log.Fatal(err)
+					fmt.Println("Error Occurred ", err)
+				}
+				//fmt.Scan(&userInput)
+
 				fmt.Println("User Input value ", userInput)
 				//myOption := checkResponse()
 				//fmt.Println("Option selected is ", myOption)
