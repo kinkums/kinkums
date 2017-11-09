@@ -28,7 +28,7 @@ func main() {
 			select {
 
 			case msg2 := <-c2:
-				fmt.Println("Do you want to continue / exit (C/E)")
+				fmt.Print("Do you want to continue / exit (C/E)")
 				myOption := checkResponse()
 				fmt.Println("Option selected is ", myOption)
 				if myOption == true {
@@ -47,7 +47,7 @@ func main() {
 
 func checkResponse() bool {
 	var userInput string
-	_, errorOccured := fmt.Scanln(&userInput)
+	_, errorOccured := fmt.Scan(&userInput)
 	if errorOccured != nil {
 		log.Fatal(errorOccured)
 	}
