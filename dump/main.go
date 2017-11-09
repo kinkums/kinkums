@@ -11,7 +11,7 @@ func main() {
 
 	go func() {
 		for {
-			time.Sleep(time.Second * 10)
+			time.Sleep(time.Second * 15)
 			c1 <- "eligible for a 5 minute break"
 
 		}
@@ -19,7 +19,7 @@ func main() {
 
 	go func() {
 		for {
-			time.Sleep(time.Second * 25)
+			time.Sleep(time.Second * 17)
 			c2 <- "eligible for a 30 minute break"
 		}
 	}()
@@ -32,11 +32,11 @@ func main() {
 
 				fmt.Println(msg2)
 				//var dump int
-				fmt.Print("Enter 1 to Continue")
+				fmt.Println("Enter 1 to Continue")
 				var i string
-				_, err := fmt.Scanln(&i)
-				fmt.Println("Value of dump is ", i)
-				fmt.Println("Value of err is ", err)
+				fmt.Scanln("%s", &i)
+				fmt.Println("Value of dump is %s", i)
+
 			case msg1 := <-c1:
 				fmt.Println(msg1)
 			}
