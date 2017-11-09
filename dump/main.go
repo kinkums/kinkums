@@ -32,12 +32,12 @@ func main() {
 
 				fmt.Println(msg2)
 				i := Value()
-				fmt.Printf("Entered value is %s", i)
+				fmt.Printf("Entered value is %s ", i)
 				//var dump int
-				fmt.Println("Enter 1 to Continue")
+				//fmt.Println("Enter 1 to Continue")
 
-				fmt.Scanf("%s", &i)
-				fmt.Printf("Value of dump is %s", i)
+				//fmt.Scanf("%s", &i)
+				//fmt.Printf("Value of dump is %s", i)
 
 			case msg1 := <-c1:
 				fmt.Println(msg1)
