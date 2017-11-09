@@ -31,8 +31,13 @@ func main() {
 			case msg2 := <-c2:
 
 				fmt.Println(msg2)
-				i := value()
-				fmt.Printf("Entered value is %s ", i)
+				i := "Yes"
+				fmt.Println("Entered value is %s ", i)
+				if i == "Yes" {
+					fmt.Println("Printing Yes ", i)
+				} else {
+					fmt.Println("Noooooooooo")
+				}
 				//var dump int
 				//fmt.Println("Enter 1 to Continue")
 
@@ -52,12 +57,12 @@ func main() {
 	fmt.Scanln(&input)
 }
 
-func value() string {
+/*func value() string {
 	fmt.Println(" Enter a String Value")
 	var data string
 	fmt.Scanf("%s", data)
 	return data
-}
+}*/
 
 /*func checkResponse() bool {
 	var userInput string
