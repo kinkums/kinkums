@@ -32,12 +32,11 @@ func main() {
 				fmt.Print("Do you want to continue / exit (Press C for continue, any character for exit)")
 				var userInput string
 				_, err := fmt.Scan(&userInput)
-
+				fmt.Println("User Input value ", userInput)
 				if err != nil {
 					log.Fatal(err)
 				}
 
-				fmt.Println("User Input value ", userInput)
 				//myOption := checkResponse()
 				//fmt.Println("Option selected is ", myOption)
 				//fmt.Println("Input Value ", myOption)
@@ -49,9 +48,10 @@ func main() {
 			case msg1 := <-c1:
 				fmt.Println(msg1)
 			}
+			var xinput string
+			fmt.Scanln(&xinput)
 		}
-		var xinput string
-		fmt.Scanln(&xinput)
+
 	}()
 	var input string
 	fmt.Scanln(&input)
