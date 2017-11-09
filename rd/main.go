@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"time"
 )
 
@@ -31,16 +30,17 @@ func main() {
 			case msg2 := <-c2:
 				fmt.Print("Do you want to continue / exit (Press C for continue, any character for exit)")
 				var userInput string
-				_, err := fmt.Scan(&userInput)
+				/*_, err := fmt.Scan(&userInput)
 				fmt.Println("User Input value ", userInput)
 				if err != nil {
 					log.Fatal(err)
-				}
-
+				}*/
+				fmt.Sscan(userInput)
+				fmt.Println("User Input value ", userInput)
 				//myOption := checkResponse()
 				//fmt.Println("Option selected is ", myOption)
 				//fmt.Println("Input Value ", myOption)
-				if userInput == "C" {
+				if userInput == "Cont" {
 					fmt.Println(msg2)
 				} else {
 					break
