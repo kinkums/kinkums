@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"time"
 )
 
@@ -24,29 +25,16 @@ func main() {
 		}
 	}()
 	go func() {
-		var userInput string
 		for {
 			select {
 
 			case msg2 := <-c2:
-				fmt.Print("Do you want to continue / exit (Press C for continue, any character for exit)")
-
-				_, err := fmt.Scan(&userInput)
-				fmt.Println("User Input value ", userInput)
-				if err != nil {
-					//log.Fatal(err)
-					fmt.Println("Error Occurred ", err)
-				}
-				//fmt.Scan(&userInput)
-
-				fmt.Println("User Input value ", userInput)
-				//myOption := checkResponse()
-				//fmt.Println("Option selected is ", myOption)
-				//fmt.Println("Input Value ", myOption)
-				if userInput == "Cont" {
+				fmt.Print("Enter your choice (C/E) ")
+				a := checkResponse()
+				fmt.Println(" Value of A is ", a)
+				if a {
 					fmt.Println(msg2)
 				} else {
-					fmt.Println("I am here, I don't know Why")
 					break
 				}
 			case msg1 := <-c1:
@@ -60,20 +48,24 @@ func main() {
 	fmt.Scanln(&input)
 }
 
-/*func checkResponse() string {
+func checkResponse() bool {
 	var userInput string
 	_, err := fmt.Scan(&userInput)
-
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("User Input value ", userInput)
-
+	fmt.Println("Type of UI is %T", userInput)
+	fmt.Println("User Input values are ", userInput)
+	//const cont string = "C"
+	//const exits string = "E"
 	if userInput == "C" {
 		fmt.Println("Came into if")
-		return "C"
-	} else {
+		return true
+	} else if userInput == "E" {
 		fmt.Println("Came into else")
-		return "X"
+		return false
+	} else {
+		fmt.Println("Valid user values are C or E")
+		return checkResponse()
 	}
-}*/
+}
