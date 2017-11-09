@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"time"
 )
 
@@ -30,13 +29,16 @@ func main() {
 
 			case msg2 := <-c2:
 				fmt.Print("Enter your choice (C/E) ")
-				a := checkResponse()
-				fmt.Println(" Value of A is ", a)
-				if a {
+				var userInput string
+				fmt.Scan(&userInput)
+				//a := checkResponse()
+				fmt.Println(" Value of UserInput is ", userInput)
+				fmt.Println(msg2)
+				/*if a {
 					fmt.Println(msg2)
 				} else {
 					break
-				}
+				}*/
 			case msg1 := <-c1:
 				fmt.Println(msg1)
 			}
@@ -48,7 +50,7 @@ func main() {
 	fmt.Scanln(&input)
 }
 
-func checkResponse() bool {
+/*func checkResponse() bool {
 	var userInput string
 	_, err := fmt.Scan(&userInput)
 	if err != nil {
@@ -67,5 +69,5 @@ func checkResponse() bool {
 	} /*else {
 		fmt.Println("Valid user values are C or E")
 		return checkResponse()
-	}*/
-}
+	}
+}*/
