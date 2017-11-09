@@ -11,14 +11,14 @@ func main() {
 	c2 := make(chan string)
 	go func() {
 		for {
-			time.Sleep(time.Minute * 2)
 			c1 <- "eligible for a 5 minute break"
+			time.Sleep(time.Minute * 2)
 		}
 	}()
 	go func() {
 		for {
-			time.Sleep(time.Minute * 5)
 			c2 <- "eligible for a 30 minute break"
+			time.Sleep(time.Minute * 5)
 		}
 	}()
 	go func() {
