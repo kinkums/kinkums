@@ -24,6 +24,7 @@ func main() {
 	go func() {
 		for {
 			select {
+
 			case msg2 := <-c2:
 				fmt.Print("Do you want to continue (Press C) or exit (Press X)")
 				fmt.Scan(&myOption)
@@ -39,6 +40,6 @@ func main() {
 			}
 		}
 	}()
-	//var input string
-	//fmt.Scanln(&input)
+	var input string
+	fmt.Scanln(&input)
 }
