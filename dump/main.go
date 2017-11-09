@@ -34,8 +34,8 @@ func main() {
 				//var dump int
 				fmt.Println("Enter 1 to Continue")
 				var i string
-				fmt.Scanln("%s", &i)
-				fmt.Println("Value of dump is %s", i)
+				fmt.Scanf("%s", &i)
+				fmt.Printf("Value of dump is %s", i)
 
 			case msg1 := <-c1:
 				fmt.Println(msg1)
