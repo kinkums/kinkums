@@ -48,8 +48,7 @@ func main() {
 			case msg1 := <-c1:
 				fmt.Println(msg1)
 			}
-			var xinput string
-			fmt.Scanln(&xinput)
+
 		}
 
 	}()
