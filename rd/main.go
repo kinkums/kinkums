@@ -24,12 +24,13 @@ func main() {
 		}
 	}()
 	go func() {
+		var userInput string
 		for {
 			select {
 
 			case msg2 := <-c2:
 				fmt.Print("Do you want to continue / exit (Press C for continue, any character for exit)")
-				var userInput string
+
 				/*_, err := fmt.Scan(&userInput)
 				fmt.Println("User Input value ", userInput)
 				if err != nil {
