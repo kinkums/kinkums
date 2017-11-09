@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	var myOption string
+	var myOption bool
 	c1 := make(chan string)
 	c2 := make(chan string)
 	go func() {
@@ -26,14 +26,12 @@ func main() {
 			select {
 
 			case msg2 := <-c2:
-				fmt.Print("Do you want to continue (Press C) or exit (Press X)")
+				fmt.Print("Do you want to continue (Y/N)")
 				fmt.Scan(&myOption)
-				if myOption == "C" || myOption == "c" {
+				if myOption == true {
 					fmt.Println(msg2)
-				} else if myOption == "X" || myOption == "x" {
-					break
 				} else {
-					fmt.Println("Invalid Option: Press 'C' or 'X' to continue ")
+					break
 				}
 			case msg1 := <-c1:
 				fmt.Println(msg1)
