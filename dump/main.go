@@ -30,7 +30,11 @@ func main() {
 			select {
 
 			case msg2 := <-c2:
+
 				fmt.Println(msg2)
+				var dump string
+				fmt.Scan(&dump)
+				fmt.Println("Value of dump is ", dump)
 			case msg1 := <-c1:
 				fmt.Println(msg1)
 			}
