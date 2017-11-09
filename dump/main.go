@@ -2,16 +2,49 @@ package main
 
 import (
 	"fmt"
-	"log"
+	"time"
 )
 
 func main() {
-	fmt.Print("Enter your choice (C/E) ")
+	c1 := make(chan string)
+	c2 := make(chan string)
+
+	go func() {
+		for {
+			time.Sleep(time.Second * 10)
+			c1 <- "eligible for a 5 minute break"
+
+		}
+	}()
+
+	go func() {
+		for {
+			time.Sleep(time.Second * 25)
+			c2 <- "eligible for a 30 minute break"
+
+		}
+	}()
+
+	go func() {
+		for {
+			select {
+
+			case msg2 := <-c2:
+				fmt.Println(msg2)
+			case msg1 := <-c1:
+				fmt.Println(msg1)
+			}
+		}
+	}()
+	/*fmt.Print("Enter your choice (C/E) ")
 	a := checkResponse()
-	fmt.Println(" Value of A is ", a)
+	fmt.Println(" Value of A is ", a)*/
+
+	var input string
+	fmt.Scanln(&input)
 }
 
-func checkResponse() bool {
+/*func checkResponse() bool {
 	var userInput string
 	_, err := fmt.Scan(&userInput)
 	if err != nil {
@@ -31,4 +64,4 @@ func checkResponse() bool {
 		fmt.Println("Valid user values are C or E")
 		return checkResponse()
 	}
-}
+}*/
