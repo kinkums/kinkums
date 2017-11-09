@@ -29,14 +29,15 @@ func main() {
 			select {
 
 			case msg2 := <-c2:
-
+				var i string
 				fmt.Println(msg2)
-				i := "Yes"
-				fmt.Println("Entered value is %s ", i)
+				//i := "Yes"
+				fmt.Println("Enter a value ")
+				fmt.Scanf("%s", &i)
 				if i == "Yes" {
 					fmt.Println("Printing Yes ", i)
 				} else {
-					fmt.Println("Noooooooooo")
+					fmt.Println("Noooooooooo", i)
 				}
 				//var dump int
 				//fmt.Println("Enter 1 to Continue")
@@ -44,8 +45,8 @@ func main() {
 				//fmt.Scanf("%s", &i)
 				//fmt.Printf("Value of dump is %s", i)
 
-			case msg1 := <-c1:
-				fmt.Println(msg1)
+				/*case msg1 := <-c1:
+				fmt.Println(msg1)*/
 			}
 		}
 	}()
