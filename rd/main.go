@@ -28,7 +28,7 @@ func main() {
 			select {
 
 			case msg2 := <-c2:
-				fmt.Print("Do you want to continue / exit (C/E)")
+				fmt.Println("Do you want to continue / exit (C/E)")
 				myOption := checkResponse()
 				fmt.Println("Option selected is ", myOption)
 				if myOption == true {
