@@ -13,17 +13,18 @@ func main() {
 
 func checkResponse() bool {
 	var userInput string
-	myInp, err := fmt.Scan(&userInput)
+	_, err := fmt.Scan(&userInput)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("User Input values are ", myInp, userInput)
+	fmt.Println("Type of UI is %T", userInput)
+	fmt.Println("User Input values are ", userInput)
 	//const cont string = "C"
 	//const exits string = "E"
-	if myInp == 67 {
+	if userInput == "C" {
 		fmt.Println("Came into if")
 		return true
-	} else if myInp == 69 {
+	} else if userInput == "E" {
 		fmt.Println("Came into else")
 		return false
 	} else {
