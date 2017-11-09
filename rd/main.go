@@ -51,11 +51,14 @@ func checkResponse() bool {
 	if errorOccured != nil {
 		log.Fatal(errorOccured)
 	}
+	fmt.Println("User Input value ", userInput)
 	const cont string = "C"
 	const exits string = "E"
 	if userInput == cont {
+		fmt.Println("Came into if")
 		return true
 	} else if userInput == exits {
+		fmt.Println("Came into else")
 		return false
 	} else {
 		fmt.Println("Valid user values are C or E")
