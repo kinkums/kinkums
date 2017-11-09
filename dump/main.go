@@ -35,7 +35,7 @@ func main() {
 				//var dump int
 				fmt.Print("Enter 1 to Continue")
 				var i int
-				_, err := fmt.Scanf("%d", &i)
+				_, err := fmt.Scanln("%d", &i)
 				fmt.Println("Value of dump is ", i, err)
 			case msg1 := <-c1:
 				fmt.Println(msg1)
@@ -47,7 +47,7 @@ func main() {
 	fmt.Println(" Value of A is ", a)*/
 
 	var input string
-	fmt.Scan(&input)
+	fmt.Scanln(&input)
 }
 
 /*func checkResponse() bool {
