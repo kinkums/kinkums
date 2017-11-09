@@ -1,7 +1,7 @@
 package main
 
 import "fmt"
-import "strings"
+
 import "log"
 import "time"
 
@@ -53,9 +53,9 @@ func checkResponse() bool {
 	}
 	const cont string = "C"
 	const exits string = "E"
-	if strings.EqualFold(cont, userInput) {
+	if userInput == cont {
 		return true
-	} else if strings.EqualFold(exits, userInput) {
+	} else if userInput == exits {
 		return false
 	} else {
 		fmt.Println("Valid user values are C or E")
