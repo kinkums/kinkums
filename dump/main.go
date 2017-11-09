@@ -34,6 +34,7 @@ func main() {
 				//i := "Yes"
 				fmt.Println("Enter a value ")
 				fmt.Scanf("%s", &i)
+				fmt.Println("Value taken ", i)
 				if i == "Yes" {
 					fmt.Println("Printing Yes ", i)
 				} else {
