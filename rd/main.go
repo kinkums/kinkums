@@ -28,7 +28,7 @@ func main() {
 			select {
 
 			case msg2 := <-c2:
-				fmt.Print("Do you want to continue / exit (Continue/Exit)")
+				fmt.Print("Do you want to continue / exit (C/E)")
 				myOption := checkResponse()
 				if myOption == true {
 					fmt.Println(msg2)
@@ -50,14 +50,14 @@ func checkResponse() bool {
 	if errorOccured != nil {
 		log.Fatal(errorOccured)
 	}
-	const cont string = "Cont"
-	const exits string = "Exit"
+	const cont string = "C"
+	const exits string = "E"
 	if strings.EqualFold(cont, userInput) {
 		return true
 	} else if strings.EqualFold(exits, userInput) {
 		return false
 	} else {
-		fmt.Println("Valid user values are Cont or Exit")
+		fmt.Println("Valid user values are C or E")
 		return checkResponse()
 	}
 }
