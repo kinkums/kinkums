@@ -36,7 +36,7 @@ func main() {
 				if err != nil {
 					log.Fatal(err)
 				}*/
-				fmt.Scanln(&userInput)
+				fmt.Scan(&userInput)
 				fmt.Println("User Input value ", userInput)
 				//myOption := checkResponse()
 				//fmt.Println("Option selected is ", myOption)
