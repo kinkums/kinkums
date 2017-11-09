@@ -17,7 +17,7 @@ func checkResponse() bool {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("User Input value ", myInp)
+	fmt.Println("User Input values are ", myInp, userInput)
 	//const cont string = "C"
 	//const exits string = "E"
 	if myInp == 67 {
