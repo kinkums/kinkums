@@ -54,18 +54,18 @@ func checkResponse() bool {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Type of UI is %T", userInput)
+	//fmt.Println("Type of UI is %T", userInput)
 	fmt.Println("User Input values are ", userInput)
 	//const cont string = "C"
 	//const exits string = "E"
 	if userInput == "C" {
 		fmt.Println("Came into if")
 		return true
-	} else if userInput == "E" {
+	} else {
 		fmt.Println("Came into else")
 		return false
-	} else {
+	} /*else {
 		fmt.Println("Valid user values are C or E")
 		return checkResponse()
-	}
+	}*/
 }
