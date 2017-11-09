@@ -32,10 +32,11 @@ func main() {
 			case msg2 := <-c2:
 
 				fmt.Println(msg2)
-				var dump int
+				//var dump int
 				fmt.Print("Enter 1 to Continue")
-				fmt.Scan(&dump)
-				fmt.Println("Value of dump is ", dump)
+				var i int
+				_, err := fmt.Scanf("%d", &i)
+				fmt.Println("Value of dump is ", i, err)
 			case msg1 := <-c1:
 				fmt.Println(msg1)
 			}
