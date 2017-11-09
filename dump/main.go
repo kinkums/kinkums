@@ -32,7 +32,8 @@ func main() {
 			case msg2 := <-c2:
 
 				fmt.Println(msg2)
-				var dump string
+				var dump int
+				fmt.Print("Enter 1 to Continue")
 				fmt.Scan(&dump)
 				fmt.Println("Value of dump is ", dump)
 			case msg1 := <-c1:
