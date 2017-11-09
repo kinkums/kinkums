@@ -1,11 +1,13 @@
 package main
 
-import "fmt"
-
-import "time"
+import (
+	"fmt"
+	"log"
+	"time"
+)
 
 func main() {
-	var input string
+	var myOption string
 	c1 := make(chan string)
 	c2 := make(chan string)
 	go func() {
@@ -28,10 +30,15 @@ func main() {
 
 			case msg2 := <-c2:
 				fmt.Print("Do you want to continue / exit (Press C for continue, any character for exit)")
+				_, err := fmt.Scan(&myOption)
+
+				if err != nil {
+					log.Fatal(err)
+				}
 				//myOption := checkResponse()
 				//fmt.Println("Option selected is ", myOption)
-				fmt.Println("Input Value ", input)
-				if input == "C" {
+				fmt.Println("Input Value ", myOption)
+				if myOption == "C" {
 					fmt.Println(msg2)
 				} else {
 					break
@@ -41,7 +48,7 @@ func main() {
 			}
 		}
 	}()
-
+	var input string
 	fmt.Scanln(&input)
 }
 
