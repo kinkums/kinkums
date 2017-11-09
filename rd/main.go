@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	var myOption string
+
 	c1 := make(chan string)
 	c2 := make(chan string)
 	go func() {
@@ -30,12 +30,8 @@ func main() {
 
 			case msg2 := <-c2:
 				fmt.Print("Do you want to continue / exit (Press C for continue, any character for exit)")
-				_, err := fmt.Scan(&myOption)
-
-				if err != nil {
-					log.Fatal(err)
-				}
-				//myOption := checkResponse()
+				//var myOption string
+				myOption := checkResponse()
 				//fmt.Println("Option selected is ", myOption)
 				fmt.Println("Input Value ", myOption)
 				if myOption == "C" {
@@ -52,23 +48,20 @@ func main() {
 	fmt.Scanln(&input)
 }
 
-//func checkResponse() bool {
-//var userInput string
-/*	_, err := fmt.Scan(&userInput)
+func checkResponse() string {
+	var userInput string
+	_, err := fmt.Scan(&userInput)
 
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("User Input value ", userInput)*/
+	fmt.Println("User Input value ", userInput)
 
-/*if input == "C" {
+	if userInput == "C" {
 		fmt.Println("Came into if")
-		return true
-	} else if input == "E" {
-		fmt.Println("Came into else")
-		return false
+		return "C"
 	} else {
-		fmt.Println("Valid user values are C or E")
-		return checkResponse()
+		fmt.Println("Came into else")
+		return "X"
 	}
-}*/
+}
