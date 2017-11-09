@@ -31,7 +31,7 @@ func main() {
 			case msg2 := <-c2:
 
 				fmt.Println(msg2)
-				i := Value()
+				i := value()
 				fmt.Printf("Entered value is %s ", i)
 				//var dump int
 				//fmt.Println("Enter 1 to Continue")
@@ -52,7 +52,7 @@ func main() {
 	fmt.Scanln(&input)
 }
 
-func Value() string {
+func value() string {
 	fmt.Println(" Enter a String Value")
 	var data string
 	fmt.Scanf("%s", data)
