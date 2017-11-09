@@ -11,14 +11,14 @@ func main() {
 	c2 := make(chan string)
 	go func() {
 		for {
-			time.Sleep(time.Second * 20)
+			time.Sleep(time.Second * 10)
 			c1 <- "eligible for a 5 minute break"
 
 		}
 	}()
 	go func() {
 		for {
-			time.Sleep(time.Second * 45)
+			time.Sleep(time.Second * 25)
 			c2 <- "eligible for a 30 minute break"
 
 		}
@@ -41,8 +41,8 @@ func main() {
 			}
 		}
 	}()
-	//var input string
-	//fmt.Scanln(&input)
+	var input string
+	fmt.Scan(&input)
 }
 
 func checkResponse() bool {
