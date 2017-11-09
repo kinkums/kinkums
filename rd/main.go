@@ -30,11 +30,17 @@ func main() {
 
 			case msg2 := <-c2:
 				fmt.Print("Do you want to continue / exit (Press C for continue, any character for exit)")
-				//var myOption string
-				myOption := checkResponse()
+				var userInput string
+				_, err := fmt.Scan(&userInput)
+
+				if err != nil {
+					log.Fatal(err)
+				}
+				fmt.Println("User Input value ", userInput)
+				//myOption := checkResponse()
 				//fmt.Println("Option selected is ", myOption)
-				fmt.Println("Input Value ", myOption)
-				if myOption == "C" {
+				//fmt.Println("Input Value ", myOption)
+				if userInput == "C" {
 					fmt.Println(msg2)
 				} else {
 					break
@@ -48,7 +54,7 @@ func main() {
 	fmt.Scanln(&input)
 }
 
-func checkResponse() string {
+/*func checkResponse() string {
 	var userInput string
 	_, err := fmt.Scan(&userInput)
 
@@ -64,4 +70,4 @@ func checkResponse() string {
 		fmt.Println("Came into else")
 		return "X"
 	}
-}
+}*/
