@@ -8,7 +8,7 @@ import (
 func main() {
 	c1 := make(chan string)
 	c2 := make(chan string)
-	c3 := make(chan string)
+	//c3 := make(chan string)
 
 	go func() {
 		for {
@@ -25,22 +25,19 @@ func main() {
 		}
 	}()
 
-	go func() {
+	/*go func() {
 		for {
-			time.Sleep(time.Second * 24)
-			fmt.Println("Enter a value ")
-			var i string
-			fmt.Scanf("%s", &i)
+
 			c3 <- i
 		}
-	}()
+	}()*/
 
 	go func() {
 		for {
 			select {
 
-			case msg3 := <-c3:
-				fmt.Println("Returned Value ", msg3)
+			//case msg3 := <-c3:
+			//fmt.Println("Returned Value ", msg3)
 			case msg2 := <-c2:
 				fmt.Println(msg2)
 			//i := "Yes"
@@ -53,6 +50,11 @@ func main() {
 	a := checkResponse()
 	fmt.Println(" Value of A is ", a)*/
 
+	time.Sleep(time.Second * 24)
+	fmt.Println("Enter a value ")
+	var i string
+	fmt.Scan(&i)
+	fmt.Println(i)
 	var input string
 	fmt.Scanln(&input)
 }
