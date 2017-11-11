@@ -22,8 +22,13 @@ func main() {
 	go func() {
 		for {
 			time.Sleep(time.Second * 17)
+			fmt.Println("Do you want to quit (Type Yes to continue, any other value to quit) ")
 			//c2 <- "eligible for a 30 minute break"
-			c2 <- i
+			if i == "Yes" {
+				c2 <- i
+			} else {
+				c2 <- "eligible for a 30 minute break"
+			}
 		}
 	}()
 
@@ -52,10 +57,10 @@ func main() {
 	a := checkResponse()
 	fmt.Println(" Value of A is ", a)*/
 
-	time.Sleep(time.Second * 17)
-	fmt.Println("Enter a value ")
-
-	fmt.Scan(&i)
+	for {
+		time.Sleep(time.Second * 17)
+		fmt.Scan(&i)
+	}
 	//fmt.Println(i)
 	var input string
 	fmt.Scanln(&input)
