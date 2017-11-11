@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"time"
 )
 
@@ -10,8 +9,8 @@ func main() {
 	c1 := make(chan string)
 	c2 := make(chan string)
 	//c3 := make(chan string)
-	done := make(chan struct{})
-	//var i string
+	//done := make(chan struct{})
+	var i string
 
 	go func() {
 		for {
@@ -24,16 +23,14 @@ func main() {
 	go func() {
 		/*for {*/
 		time.Sleep(time.Second * 17)
-		fmt.Println("Press Y to close, any other key to continue ")
+		c2 <- i
+
+		//fmt.Println("Press Y to close, any other key to continue ")
 
 		//os.Stdin.Read(make([]byte, 1))
 		//fmt.Println("A", xx)
 		//c2 <- "Application closing"
-		var rad []byte
-		os.Stdin.Read(rad)
-		fmt.Println("RAd is ", rad)
-		time.Sleep(time.Second * 10)
-		close(done)
+
 		/*} else {
 			c2 <- "eligible for a 30 minute break"
 		}*/
@@ -66,8 +63,8 @@ func main() {
 	go func() {
 		for {
 			select {
-			case msg3 := <-done:
-				fmt.Println("App closed", msg3)
+			//case msg3 := <-done:
+			//fmt.Println("App closed", msg3)
 			//case msg3 := <-c3:
 			//fmt.Println("Returned Value ", msg3)
 			case msg2 := <-c2:
@@ -82,13 +79,13 @@ func main() {
 	a := checkResponse()
 	fmt.Println(" Value of A is ", a)*/
 
-	//for {
-	//	time.Sleep(time.Second * 17)
-	//	fmt.Println("Do you want to quit (Type Yes to continue, any other value to quit) ")
-	//c2 <- "eligible for a 30 minute break"
-	//	fmt.Scan(&i)
+	for {
+		time.Sleep(time.Second * 17)
+		fmt.Println("Do you want to quit (Type Yes to continue, any other value to quit) ")
+		c2 <- "eligible for a 30 minute break"
+		fmt.Scan(&i)
 
-	//	}
+	}
 	//fmt.Println(i)
 	var input string
 	fmt.Scanln(&input)
