@@ -24,7 +24,14 @@ func main() {
 	go func() {
 		/*for {*/
 		time.Sleep(time.Second * 17)
-		c2 <- "eligible for a 30 minute break"
+		fmt.Println("Press Y to close, any other key to continue ")
+		z, a := os.Stdin.Read(make([]byte, 1))
+		fmt.Println("A", z, a)
+		//c2 <- "Application closing"
+		close(done)
+		/*} else {
+			c2 <- "eligible for a 30 minute break"
+		}*/
 		/*if i == "Yes" {
 				c2 <- i
 			} else {
@@ -34,13 +41,13 @@ func main() {
 
 	}()
 
-	go func() {
-		//for {
+	//go func() {
+	//for {
 
-		os.Stdin.Read(make([]byte, 2))
-		close(done)
-		//	}
-	}()
+	//os.Stdin.Read(make([]byte, 2))
+	//close(done)
+	//	}
+	//}()
 
 	//func cancelled() bool {
 	//	select {
