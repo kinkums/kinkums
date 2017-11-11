@@ -37,7 +37,7 @@ func main() {
 	go func() {
 		//for {
 
-		os.Stdin.Read(make([]byte, 1))
+		os.Stdin.Read(make([]byte, 2))
 		close(done)
 		//	}
 	}()
