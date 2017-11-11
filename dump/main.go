@@ -25,9 +25,11 @@ func main() {
 		/*for {*/
 		time.Sleep(time.Second * 17)
 		fmt.Println("Press Y to close, any other key to continue ")
-		z, a := os.Stdin.Read(make([]byte, 1))
-		fmt.Println("A", z, a)
+
+		fmt.Println(os.Stdin.Read(make([]byte, 1)))
+		//fmt.Println("A", xx)
 		//c2 <- "Application closing"
+
 		close(done)
 		/*} else {
 			c2 <- "eligible for a 30 minute break"
