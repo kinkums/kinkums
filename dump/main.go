@@ -24,6 +24,7 @@ func main() {
 			time.Sleep(time.Second * 17)
 			fmt.Println("Do you want to quit (Type Yes to continue, any other value to quit) ")
 			//c2 <- "eligible for a 30 minute break"
+			fmt.Scan(&i)
 			if i == "Yes" {
 				c2 <- i
 			} else {
@@ -57,10 +58,10 @@ func main() {
 	a := checkResponse()
 	fmt.Println(" Value of A is ", a)*/
 
-	for {
-		time.Sleep(time.Second * 17)
-		fmt.Scan(&i)
-	}
+	//for {
+	//time.Sleep(time.Second * 17)
+
+	//}
 	//fmt.Println(i)
 	var input string
 	fmt.Scanln(&input)
