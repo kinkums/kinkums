@@ -9,6 +9,7 @@ func main() {
 	c1 := make(chan string)
 	c2 := make(chan string)
 	//c3 := make(chan string)
+	var i string
 
 	go func() {
 		for {
@@ -21,7 +22,8 @@ func main() {
 	go func() {
 		for {
 			time.Sleep(time.Second * 17)
-			c2 <- "eligible for a 30 minute break"
+			//c2 <- "eligible for a 30 minute break"
+			c2 <- i
 		}
 	}()
 
@@ -50,11 +52,11 @@ func main() {
 	a := checkResponse()
 	fmt.Println(" Value of A is ", a)*/
 
-	time.Sleep(time.Second * 24)
+	time.Sleep(time.Second * 17)
 	fmt.Println("Enter a value ")
-	var i string
+
 	fmt.Scan(&i)
-	fmt.Println(i)
+	//fmt.Println(i)
 	var input string
 	fmt.Scanln(&input)
 }
