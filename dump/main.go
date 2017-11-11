@@ -8,10 +8,11 @@ import (
 func main() {
 	c1 := make(chan string)
 	c2 := make(chan string)
+	c3 := make(chan string)
 
 	go func() {
 		for {
-			time.Sleep(time.Second * 15)
+			time.Sleep(time.Second * 11)
 			c1 <- "eligible for a 5 minute break"
 
 		}
@@ -26,28 +27,25 @@ func main() {
 
 	go func() {
 		for {
+			time.Sleep(time.Second * 24)
+			fmt.Println("Enter a value ")
+			var i string
+			fmt.Scanf("%s", &i)
+			c3 <- i
+		}
+	}()
+
+	go func() {
+		for {
 			select {
 
+			case msg3 := <-c3:
+				fmt.Println("Returned Value ", msg3)
 			case msg2 := <-c2:
-				var i string
 				fmt.Println(msg2)
-				//i := "Yes"
-				fmt.Println("Enter a value ")
-				fmt.Scanf("%s", &i)
-				fmt.Println("Value taken ", i)
-				if i == "Yes" {
-					fmt.Println("Printing Yes ", i)
-				} else {
-					fmt.Println("Noooooooooo", i)
-				}
-				//var dump int
-				//fmt.Println("Enter 1 to Continue")
-
-				//fmt.Scanf("%s", &i)
-				//fmt.Printf("Value of dump is %s", i)
-
-				/*case msg1 := <-c1:
-				fmt.Println(msg1)*/
+			//i := "Yes"
+			case msg1 := <-c1:
+				fmt.Println(msg1)
 			}
 		}
 	}()
