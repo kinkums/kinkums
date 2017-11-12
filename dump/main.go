@@ -26,6 +26,7 @@ func main() {
 		fmt.Println("Do you want to quit (Type Yes to continue, any other value to quit) ")
 		//os.Stdin.Read(make([]byte, 1))
 		fmt.Scan(&i)
+		c2 <- i
 		//c2 <- "eligible for a 30 minute break"
 		//c2 <- i
 
@@ -38,13 +39,7 @@ func main() {
 		/*} else {
 			c2 <- "eligible for a 30 minute break"
 		}*/
-		if i == "Yes" {
-			fmt.Println("Finally came here")
-			c2 <- "Yes, application exits"
-			close(c2)
-		} else {
-			c2 <- "eligible for a 30 minute break"
-		}
+
 	}()
 
 	//}
@@ -74,6 +69,13 @@ func main() {
 			//case msg3 := <-c3:
 			//fmt.Println("Returned Value ", msg3)
 			case msg2 := <-c2:
+				if msg2 == "Yes" {
+					fmt.Println("Finally came here")
+					c2 <- "Yes, application exits"
+					close(c2)
+				} else {
+					c2 <- "eligible for a 30 minute break"
+				}
 				fmt.Println(msg2)
 			//i := "Yes"
 			case msg1 := <-c1:
