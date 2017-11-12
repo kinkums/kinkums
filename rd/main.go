@@ -31,15 +31,15 @@ func main() {
 			time.Sleep(time.Second * 25)
 			fmt.Println("Press any key to exit or do nothing for further")
 			os.Stdin.Read(make([]byte, 1))
-			close(done)
+			//close(done)
 
 		}
 	}()
 	go func() {
 		for {
 			select {
-			case msg3 := <-done:
-				fmt.Println(msg3)
+			case <-done:
+
 			case msg2 := <-c2:
 				/*fmt.Print("Enter your choice (C/E) ")
 				var userInput string
