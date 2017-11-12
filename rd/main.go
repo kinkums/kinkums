@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"time"
 )
 
@@ -9,6 +10,7 @@ func main() {
 
 	c1 := make(chan string)
 	c2 := make(chan string)
+	done := make(chan struct{})
 	go func() {
 		for {
 			time.Sleep(time.Second * 10)
@@ -23,16 +25,27 @@ func main() {
 
 		}
 	}()
+
+	go func() {
+		for {
+			time.Sleep(time.Second * 25)
+			fmt.Println("Press any key to exit or do nothing for further")
+			os.Stdin.Read(make([]byte, 1))
+			close(done)
+
+		}
+	}()
 	go func() {
 		for {
 			select {
-
+			case msg3 := <-done:
+				fmt.Println(msg3)
 			case msg2 := <-c2:
-				fmt.Print("Enter your choice (C/E) ")
+				/*fmt.Print("Enter your choice (C/E) ")
 				var userInput string
 				fmt.Scan("%s", &userInput)
 				//a := checkResponse()
-				fmt.Println(" Value of UserInput is %s", userInput)
+				fmt.Println(" Value of UserInput is %s", userInput)*/
 				fmt.Println(msg2)
 				/*if a {
 					fmt.Println(msg2)

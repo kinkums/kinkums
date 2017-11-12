@@ -2,15 +2,17 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"time"
 )
+
+
 
 func main() {
 	c1 := make(chan string)
 	c2 := make(chan string)
 	//c3 := make(chan string)
-	//done := make(chan struct{})
-	var i string
+	done := make(chan struct{})
 
 	go func() {
 		for {
@@ -21,45 +23,40 @@ func main() {
 	}()
 
 	go func() {
-		/*for {*/
-		time.Sleep(time.Second * 17)
-		fmt.Println("Do you want to quit (Type Yes to continue, any other value to quit) ")
-		//os.Stdin.Read(make([]byte, 1))
-		fmt.Scan(&i)
-		c2 <- i
-		//c2 <- "eligible for a 30 minute break"
-		//c2 <- i
-
-		//fmt.Println("Press Y to close, any other key to continue ")
-
-		//os.Stdin.Read(make([]byte, 1))
-		//fmt.Println("A", xx)
-		//c2 <- "Application closing"
-
-		/*} else {
+		for {
+			time.Sleep(time.Second * 17)
 			c2 <- "eligible for a 30 minute break"
-		}*/
+			//c2 <- i
+
+			//fmt.Println("Press Y to close, any other key to continue ")
+
+			//os.Stdin.Read(make([]byte, 1))
+			//fmt.Println("A", xx)
+			//c2 <- "Application closing"
+
+			/*} else {
+				c2 <- "eligible for a 30 minute break"
+			}*/
+
+		}
 
 	}()
 
-	//}
+	go func() {
+		for {
+			os.Stdin.Read(make([]byte, 1))
+			close(done)
+		}
+	}()
 
-	//go func() {
-	//for {
-
-	//os.Stdin.Read(make([]byte, 2))
-	//close(done)
-	//	}
-	//}()
-
-	//func cancelled() bool {
-	//	select {
-	//	case <-done:
-	//		return true
-	//		default:
-	//	return false
-	//	}
-	//	}
+	func cancelled() bool {
+		select {
+		case <-done:
+			return true
+		default:
+			return false
+		}
+	}
 
 	go func() {
 		for {
@@ -69,13 +66,6 @@ func main() {
 			//case msg3 := <-c3:
 			//fmt.Println("Returned Value ", msg3)
 			case msg2 := <-c2:
-				if msg2 == "Yes" {
-					fmt.Println("Finally came here")
-					c2 <- "Yes, application exits"
-					close(c2)
-				} else {
-					c2 <- "eligible for a 30 minute break"
-				}
 				fmt.Println(msg2)
 			//i := "Yes"
 			case msg1 := <-c1:
@@ -91,6 +81,8 @@ func main() {
 	var input string
 	fmt.Scanln(&input)
 }
+
+
 
 /*func value() string {
 	fmt.Println(" Enter a String Value")
