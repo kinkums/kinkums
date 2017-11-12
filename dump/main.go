@@ -39,7 +39,9 @@ func main() {
 			c2 <- "eligible for a 30 minute break"
 		}*/
 		if i == "Yes" {
-			c2 <- i
+			fmt.Println("Finally came here")
+			c2 <- "Yes, application exits"
+			close(c2)
 		} else {
 			c2 <- "eligible for a 30 minute break"
 		}
