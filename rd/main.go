@@ -10,6 +10,7 @@ func main() {
 
 	c1 := make(chan string)
 	c2 := make(chan string)
+	c3 := make(chan string)
 	done := make(chan struct{})
 	go func() {
 		for {
@@ -29,9 +30,8 @@ func main() {
 	go func() {
 		for {
 			time.Sleep(time.Second * 25)
-			fmt.Println("Press any key to exit or do nothing for further")
+			c3 <- "Press any key to exit or do nothing for further"
 			os.Stdin.Read(make([]byte, 1))
-			//close(done)
 
 		}
 	}()
@@ -39,7 +39,7 @@ func main() {
 		for {
 			select {
 			case <-done:
-
+				close(done)
 			case msg2 := <-c2:
 				/*fmt.Print("Enter your choice (C/E) ")
 				var userInput string
