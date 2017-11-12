@@ -39,6 +39,7 @@ func main() {
 		for {
 			select {
 			case <-done:
+				fmt.Println(c3)
 				close(done)
 			case msg2 := <-c2:
 				/*fmt.Print("Enter your choice (C/E) ")
