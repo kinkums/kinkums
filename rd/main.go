@@ -13,23 +13,25 @@ func main() {
 	done := make(chan struct{})
 	go func() {
 		for {
-			time.Sleep(time.Second * 20)
+			time.Sleep(time.Second * 10)
 			c1 <- "eligible for a 5 minute break"
-			time.Sleep(time.Second * 5)
+			time.Sleep(time.Second * 3)
+			c1 <- "Get back to work"
 		}
 	}()
 
 	go func() {
 		for {
-			time.Sleep(time.Second * 25)
+			time.Sleep(time.Second * 14)
 			c2 <- "you are eligible for a 30 minute break\n Press any key if you want to exit or do nothing to continue\n"
-			time.Sleep(time.Second * 15)
+			time.Sleep(time.Second * 10)
+			c2 <- "Get back to work"
 		}
 	}()
 
 	go func() {
 		for {
-			time.Sleep(time.Second * 25)
+			time.Sleep(time.Hour * 3)
 			os.Stdin.Read(make([]byte, 1))
 		}
 	}()
