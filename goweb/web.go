@@ -11,7 +11,7 @@ type Page struct {
 }
 
 func (p *Page) save() error {
-	filename := p.Title + ".txt"
+	filename := "c:\\gocode\\src\\github.com\\kinkums\\kinkums\\goweb\\" + p.Title + ".txt"
 	return ioutil.WriteFile(filename, p.Body, 0600)
 }
 
