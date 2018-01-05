@@ -12,6 +12,7 @@ func upload(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		t, _ := template.ParseFiles("upload.gtpl")
 		t.Execute(w, nil)
+		fmt.Println(" Method is Get ")
 	} else if r.Method == "POST" {
 		file, handler, err := r.FormFile("uploadfile")
 		if err != nil {
@@ -19,7 +20,7 @@ func upload(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		defer file.Close()
-
+		fmt.Println(" Method is Post ")
 		fmt.Fprintf(w, "%v", handler.Header)
 		f, err := os.OpenFile("./test/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
 		if err != nil {
