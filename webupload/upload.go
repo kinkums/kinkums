@@ -37,7 +37,7 @@ func sendMsgToMQ() {
 
 	failOnError(err, "Failed to declare a queue")
 
-	body := "hello"
+	body := "Image sent to RabbitMQ"
 	err = ch.Publish(
 		"",     //exchange
 		q.Name, //routing key
@@ -66,6 +66,7 @@ func upload(w http.ResponseWriter, r *http.Request) {
 		}
 		defer file.Close()
 		fmt.Println(" Method is Post ")
+		sendMsgToMQ()
 		fmt.Fprintf(w, "%v", handler.Header)
 		f, err := os.OpenFile("./test/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
 		if err != nil {
@@ -82,5 +83,5 @@ func upload(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/upload", upload)
 	http.ListenAndServe(":9090", nil)
-	sendMsgToMQ()
+	//sendMsgToMQ()
 }
