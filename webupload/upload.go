@@ -66,7 +66,7 @@ func upload(w http.ResponseWriter, r *http.Request) {
 		}
 		defer file.Close()
 		fmt.Println(" Method is Post ")
-		sendMsgToMQ()
+
 		fmt.Fprintf(w, "%v", handler.Header)
 		f, err := os.OpenFile("./test/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
 		if err != nil {
@@ -75,6 +75,7 @@ func upload(w http.ResponseWriter, r *http.Request) {
 		}
 		defer file.Close()
 		io.Copy(f, file)
+		sendMsgToMQ()
 	} else {
 		fmt.Println("Unknown HTTP " + r.Method + " Method")
 	}
