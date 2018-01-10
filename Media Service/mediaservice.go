@@ -10,7 +10,7 @@ import (
 
 func upload(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-		t, _ := template.ParseFiles("imageUpload.gtpl")
+		t, _ := template.ParseFiles("upload.gtpl")
 		t.Execute(w, nil)
 		//fmt.Println(" Method is Get ")
 	} else if r.Method == "POST" {
@@ -35,6 +35,6 @@ func upload(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/imageUpload", upload)
+	http.HandleFunc("/upload", upload)
 	http.ListenAndServe(":9090", nil)
 }
