@@ -35,6 +35,6 @@ func upload(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/upload", upload)
+	http.HandleFunc("/imageUpload", upload)
 	http.ListenAndServe(":9090", nil)
 }
