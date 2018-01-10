@@ -75,10 +75,11 @@ func upload(w http.ResponseWriter, r *http.Request) {
 		}
 		defer file.Close()
 		io.Copy(f, file)
-		sendMsgToMQ()
+
 	} else {
 		fmt.Println("Unknown HTTP " + r.Method + " Method")
 	}
+	sendMsgToMQ()
 }
 
 func main() {
