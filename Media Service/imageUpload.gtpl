@@ -3,7 +3,7 @@
     <title> Upload an Image </title>
   </head>
   <body>
-    <form enctype = "multipart/form-data" action = "http://127.0.0.1:9090/imageUpload" method = "post">
+    <form enctype = "multipart/form-data" action = "http://127.0.0.1:9090/mediaservice" method = "post">
       {{/* 1. File input */}}
       <input type = "file" name = "uploadfile"/>
       {{/* 2. Submit button */}}
