@@ -26,4 +26,18 @@ func main() {
 	}
 	file.Close()
 	fmt.Println("Image downloaded")
+
+	/*f, err := os.Create("./convert/pic2.png")
+		if err != nil {
+			log.Fatal(err)
+		}
+	  img
+		if err := png.Encode(f, "./images/pic2.jpg"); err != nil {
+			f.Close()
+			log.Fatal(err)
+		}
+
+		if err := f.Close(); err != nil {
+			log.Fatal(err)
+		}*/
 }
