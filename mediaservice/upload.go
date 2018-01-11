@@ -22,11 +22,11 @@ func sendMsgToMQ() {
 	failOnError(err, "Failed to connect to RabbitMQ")
 	defer conn.Close()
 
-	channel, err := conn.Channel()
+	ch, err := conn.Channel()
 	failOnError(err, "Failed to open a channel")
-	defer channel.Close()
+	defer ch.Close()
 
-	q, err := channel.QueueDeclare(
+	q, err := ch.QueueDeclare(
 		"hello", //name
 		false,   //durable
 		false,   //delete when unused
@@ -37,8 +37,8 @@ func sendMsgToMQ() {
 
 	failOnError(err, "Failed to declare a queue")
 
-	body := "Image stored to RabbitMQ"
-	err = channel.Publish(
+	body := "Image sent to RabbitMQ"
+	err = ch.Publish(
 		"",     //exchange
 		q.Name, //routing key
 		false,  //mandatory
@@ -47,37 +47,37 @@ func sendMsgToMQ() {
 			ContentType: "text/plain",
 			Body:        []byte(body),
 		})
-	fmt.Println(" Sent ", body)
+	fmt.Println(" [x] Sent %s", body)
 	//log.Printf(" [x] Sent %s", body)
 	failOnError(err, "Failed to publish a message")
 
 }
 
-func uploadImage(w http.ResponseWriter, req *http.Request) {
-	if req.Method == "GET" {
+func uploadImage(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "GET" {
 		t, _ := template.ParseFiles("upload.gtpl")
 		t.Execute(w, nil)
-		//fmt.Println(" Method is Get ")
-	} else if req.Method == "POST" {
-		file, handler, err := req.FormFile("uploadfile")
+		fmt.Println(" Method is Get ")
+	} else if r.Method == "POST" {
+		file, handler, err := r.FormFile("uploadfile")
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 		defer file.Close()
-		//fmt.Println(" Method is Post ")
+		fmt.Println(" Method is Post ")
 
 		fmt.Fprintf(w, "%v", handler.Header)
-		img, err := os.OpenFile("./imageOutput/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
+		f, err := os.OpenFile("./imageOutput/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 		defer file.Close()
-		io.Copy(img, file)
+		io.Copy(f, file)
 		sendMsgToMQ()
 	} else {
-		fmt.Println("Unknown HTTP " + req.Method + " Method")
+		fmt.Println("Unknown HTTP " + r.Method + " Method")
 	}
 
 }
