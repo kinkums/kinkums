@@ -47,7 +47,7 @@ func sendMsgToMQ() {
 			ContentType: "text/plain",
 			Body:        []byte(body),
 		})
-	fmt.Printf(" [x] Sent %s", body)
+	fmt.Println(" [x] Sent %s", body)
 	//log.Printf(" [x] Sent %s", body)
 	failOnError(err, "Failed to publish a message")
 
@@ -68,7 +68,7 @@ func uploadImage(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(" Method is Post ")
 
 		fmt.Fprintf(w, "%v", handler.Header)
-		f, err := os.OpenFile("./test/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
+		f, err := os.OpenFile("./imageOutput/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
 		if err != nil {
 			fmt.Println(err)
 			return
