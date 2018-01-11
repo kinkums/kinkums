@@ -37,7 +37,7 @@ func sendMsgToMQ() {
 
 	failOnError(err, "Failed to declare a queue")
 
-	body := "Image sent to RabbitMQ"
+	body := "Image stored to RabbitMQ"
 	err = channel.Publish(
 		"",     //exchange
 		q.Name, //routing key
