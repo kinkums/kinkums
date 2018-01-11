@@ -8,7 +8,7 @@ import (
 
 func main() {
 	// Read image from file that already exists
-	existingImageFile, err := os.Open(".images\\5.jpg")
+	existingImageFile, err := os.Open("./images/5.jpg")
 	if err != nil {
 		// Handle error
 	}
