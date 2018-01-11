@@ -22,11 +22,11 @@ func sendMsgToMQ() {
 	failOnError(err, "Failed to connect to RabbitMQ")
 	defer conn.Close()
 
-	ch, err := conn.Channel()
+	channel, err := conn.Channel()
 	failOnError(err, "Failed to open a channel")
-	defer ch.Close()
+	defer channel.Close()
 
-	q, err := ch.QueueDeclare(
+	q, err := channel.QueueDeclare(
 		"hello", //name
 		false,   //durable
 		false,   //delete when unused
@@ -38,7 +38,7 @@ func sendMsgToMQ() {
 	failOnError(err, "Failed to declare a queue")
 
 	body := "Image sent to RabbitMQ"
-	err = ch.Publish(
+	err = channel.Publish(
 		"",     //exchange
 		q.Name, //routing key
 		false,  //mandatory
@@ -47,19 +47,19 @@ func sendMsgToMQ() {
 			ContentType: "text/plain",
 			Body:        []byte(body),
 		})
-	fmt.Println(" [x] Sent %s", body)
-	//log.Printf(" [x] Sent %s", body)
+	//fmt.Println(" [x] Sent %s", body)
+	log.Printf(" [x] Sent %s", body)
 	failOnError(err, "Failed to publish a message")
 
 }
 
-func uploadImage(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "GET" {
+func uploadImage(w http.ResponseWriter, req *http.Request) {
+	if req.Method == "GET" {
 		t, _ := template.ParseFiles("upload.gtpl")
 		t.Execute(w, nil)
 		fmt.Println(" Method is Get ")
-	} else if r.Method == "POST" {
-		file, handler, err := r.FormFile("uploadfile")
+	} else if req.Method == "POST" {
+		file, handler, err := req.FormFile("uploadfile")
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -68,16 +68,16 @@ func uploadImage(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(" Method is Post ")
 
 		fmt.Fprintf(w, "%v", handler.Header)
-		f, err := os.OpenFile("./imageOutput/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
+		img, err := os.OpenFile("./imageOutput/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 		defer file.Close()
-		io.Copy(f, file)
+		io.Copy(img, file)
 		sendMsgToMQ()
 	} else {
-		fmt.Println("Unknown HTTP " + r.Method + " Method")
+		fmt.Println("Unknown HTTP " + req.Method + " Method")
 	}
 
 }
