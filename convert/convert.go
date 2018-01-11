@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"image"
+	"image/png"
 	"os"
 )
 
@@ -10,7 +11,7 @@ func main() {
 	// Read image from file that already exists
 	existingImageFile, err := os.Open("./images/5.jpg")
 	if err != nil {
-		// Handle error
+		fmt.Println(" One ", err)
 	}
 	defer existingImageFile.Close()
 
@@ -18,8 +19,20 @@ func main() {
 	// and type of image it is as a string. We expect "png"
 	imageData, imageType, err := image.Decode(existingImageFile)
 	if err != nil {
-		// Handle error
+		fmt.Println(" Two ", err)
 	}
 	fmt.Println(imageData)
 	fmt.Println(imageType)
+
+	// We only need this because we already read from the file
+	// We have to reset the file pointer back to beginning
+	existingImageFile.Seek(0, 0)
+
+	// Alternatively, since we know it is a png already
+	// we can call png.Decode() directly
+	loadedImage, err := png.Decode(existingImageFile)
+	if err != nil {
+		fmt.Println(" Three ", err)
+	}
+	fmt.Println(loadedImage)
 }
