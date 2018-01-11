@@ -3,36 +3,38 @@ package main
 import (
 	"fmt"
 	"image"
-	"image/png"
+	"image/jpeg"
 	"os"
 )
 
+func init() {
+	// damn important or else At(), Bounds() functions will
+	// caused memory pointer error!!
+	image.RegisterFormat("jpeg", "jpeg", jpeg.Decode, jpeg.DecodeConfig)
+}
+
 func main() {
-	// Read image from file that already exists
-	existingImageFile, err := os.Open("./images/5.jpg")
-	if err != nil {
-		fmt.Println(" One ", err)
-	}
-	defer existingImageFile.Close()
+	imgfile, err := os.Open("./images/5.jpg")
 
-	// Calling the generic image.Decode() will tell give us the data
-	// and type of image it is as a string. We expect "png"
-	imageData, imageType, err := image.Decode(existingImageFile)
 	if err != nil {
-		fmt.Println(" Two ", err)
+		fmt.Println("img.jpg file not found!")
+		os.Exit(1)
 	}
-	fmt.Println(imageData)
-	fmt.Println(imageType)
 
-	// We only need this because we already read from the file
-	// We have to reset the file pointer back to beginning
-	existingImageFile.Seek(0, 0)
+	defer imgfile.Close()
 
-	// Alternatively, since we know it is a png already
-	// we can call png.Decode() directly
-	loadedImage, err := png.Decode(existingImageFile)
-	if err != nil {
-		fmt.Println(" Three ", err)
-	}
-	fmt.Println(loadedImage)
+	img, _, err := image.Decode(imgfile)
+
+	fmt.Println(img.At(10, 10))
+
+	bounds := img.Bounds()
+
+	fmt.Println(bounds)
+
+	canvas := image.NewAlpha(bounds)
+
+	// is this image opaque
+	op := canvas.Opaque()
+
+	fmt.Println(op)
 }
