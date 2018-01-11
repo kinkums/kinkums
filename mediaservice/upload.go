@@ -57,7 +57,7 @@ func uploadImage(w http.ResponseWriter, req *http.Request) {
 	if req.Method == "GET" {
 		t, _ := template.ParseFiles("upload.gtpl")
 		t.Execute(w, nil)
-		fmt.Println(" Method is Get ")
+		//fmt.Println(" Method is Get ")
 	} else if req.Method == "POST" {
 		file, handler, err := req.FormFile("uploadfile")
 		if err != nil {
@@ -65,7 +65,7 @@ func uploadImage(w http.ResponseWriter, req *http.Request) {
 			return
 		}
 		defer file.Close()
-		fmt.Println(" Method is Post ")
+		//fmt.Println(" Method is Post ")
 
 		fmt.Fprintf(w, "%v", handler.Header)
 		img, err := os.OpenFile("./imageOutput/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
