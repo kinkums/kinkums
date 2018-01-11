@@ -47,8 +47,8 @@ func sendMsgToMQ() {
 			ContentType: "text/plain",
 			Body:        []byte(body),
 		})
-	//fmt.Println(" [x] Sent %s", body)
-	log.Printf(" [x] Sent %s", body)
+	fmt.Println(" Sent ", body)
+	//log.Printf(" [x] Sent %s", body)
 	failOnError(err, "Failed to publish a message")
 
 }
