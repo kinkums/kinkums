@@ -47,13 +47,13 @@ func sendMsgToMQ() {
 			ContentType: "text/plain",
 			Body:        []byte(body),
 		})
-
-	log.Printf(" [x] Sent %s", body)
+	fmt.Printf(" [x] Sent %s", body)
+	//log.Printf(" [x] Sent %s", body)
 	failOnError(err, "Failed to publish a message")
 
 }
 
-func upload(w http.ResponseWriter, r *http.Request) {
+func uploadImage(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		t, _ := template.ParseFiles("upload.gtpl")
 		t.Execute(w, nil)
@@ -75,15 +75,15 @@ func upload(w http.ResponseWriter, r *http.Request) {
 		}
 		defer file.Close()
 		io.Copy(f, file)
-
+		sendMsgToMQ()
 	} else {
 		fmt.Println("Unknown HTTP " + r.Method + " Method")
 	}
-	sendMsgToMQ()
+
 }
 
 func main() {
-	http.HandleFunc("/upload", upload)
+	http.HandleFunc("/upload", uploadImage)
 	http.ListenAndServe(":9090", nil)
 	//sendMsgToMQ()
 }
