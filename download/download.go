@@ -12,13 +12,13 @@ import (
 )
 
 func main() {
-	url := "https://github.com/kinkums/kinkums/tree/master/webupload/imageOutput/rad.jpg"
+	url := "https://github.com/kinkums/kinkums/tree/master/webupload/imageOutput/sanju.jpg"
 	response, er := http.Get(url)
 	if er != nil {
 		log.Fatal(er)
 	}
 	defer response.Body.Close()
-	file, err := os.Create("rad.jpg")
+	file, err := os.Create("sanju.jpg")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -30,7 +30,7 @@ func main() {
 	file.Close()
 	fmt.Println("Image downloaded")
 
-	myImage := "rad.jpg"
+	myImage := "sanju.jpg"
 	fmt.Println("The image is:", myImage)
 	imageToBeRead := readTheImage(myImage)
 	fmt.Println("Reading image data ...")
