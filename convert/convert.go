@@ -2,39 +2,52 @@ package main
 
 import (
 	"fmt"
+	//"github.com/nfnt/resize"
 	"image"
 	"image/jpeg"
+	"image/png"
+	"log"
 	"os"
 )
 
-func init() {
-	// damn important or else At(), Bounds() functions will
-	// caused memory pointer error!!
-	image.RegisterFormat("jpeg", "jpeg", jpeg.Decode, jpeg.DecodeConfig)
+func main() {
+	myImage := "./images/5.jpg"
+	fmt.Println("The image is:", myImage)
+	imageToBeRead := readTheImage(myImage)
+	fmt.Println("Reading image data ...")
+	fmt.Println("Converting  image to png  ...")
+	convertToPNG(imageToBeRead)
 }
 
-func main() {
-	imgfile, err := os.Open("./images/5.jpg")
-
+func readTheImage(ImageFile string) (image image.Image) {
+	// open "test.jpg"
+	imgFile, err := os.Open(ImageFile)
 	if err != nil {
-		fmt.Println("img.jpg file not found!")
+		log.Fatal(err)
+	}
+
+	// decode jpeg into image.Image
+	img, err := jpeg.Decode(imgFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+	imgFile.Close()
+
+	return img
+}
+
+func convertToPNG(img image.Image) {
+	out, err := os.Create("./images/5.png")
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	err = png.Encode(out, img)
+	if err != nil {
+		fmt.Println(err)
 		os.Exit(1)
 	}
 
-	defer imgfile.Close()
+	fmt.Println(img, "\n success... \n ")
 
-	img, _, err := image.Decode(imgfile)
-
-	fmt.Println(img.At(10, 10))
-
-	bounds := img.Bounds()
-
-	fmt.Println(bounds)
-
-	canvas := image.NewAlpha(bounds)
-
-	// is this image opaque
-	op := canvas.Opaque()
-
-	fmt.Println(op)
 }
