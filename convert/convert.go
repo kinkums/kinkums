@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	myImage := "./images/5.jpg"
+	myImage := "5.jpg"
 	fmt.Println("The image is:", myImage)
 	imageToBeRead := readTheImage(myImage)
 	fmt.Println("Reading image data ...")
@@ -37,7 +37,7 @@ func readTheImage(ImageFile string) (image image.Image) {
 }
 
 func convertToPNG(img image.Image) {
-	out, err := os.Create("./images/5.png")
+	out, err := os.Create("5.png")
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
