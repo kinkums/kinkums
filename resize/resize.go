@@ -4,10 +4,11 @@ import (
 	"fmt"
 	//"github.com/nfnt/resize"
 	"image"
-	"image/gif"
 	"image/jpeg"
 	"log"
 	"os"
+
+	"github.com/nfnt/resize"
 )
 
 func main() {
@@ -15,8 +16,8 @@ func main() {
 	fmt.Println("The image is:", myImage)
 	imageToBeRead := readTheImage(myImage)
 	fmt.Println("Reading image data ...")
-	fmt.Println("Converting  image to thumbnail  ...")
-	convertToGIF(imageToBeRead)
+	fmt.Println("Resizing  ...")
+	resizeImage(imageToBeRead)
 }
 
 func readTheImage(ImageFile string) (image image.Image) {
@@ -36,20 +37,22 @@ func readTheImage(ImageFile string) (image image.Image) {
 	return img
 }
 
-func convertToGIF(img image.Image) {
-	out, err := os.Create("sanju.gif")
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-	var opt gif.Options
-	opt.NumColors = 256
-	err = gif.Encode(out, img, &opt)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+func resizeImage(img image.Image) {
 
-	fmt.Println(img, "\n success... \n ")
+	m := resize.Resize(100, 100, img, resize.NearestNeighbor)
+
+	out, err := os.Create("sanju_resized.jpg")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer out.Close()
+
+	// write new image to file
+	anyError := jpeg.Encode(out, m, nil)
+	if anyError != nil {
+		fmt.Println("Resizing did not work ")
+		os.Exit(0)
+	}
+	fmt.Println("success...")
 
 }
