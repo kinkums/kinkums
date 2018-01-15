@@ -1,31 +1,37 @@
-package main
+import co.paralleluniverse.fibers.*;
+import java.util.concurrent.*;
+import java.time.*;
 
-import "fmt"
-import "time"
+public class Skynet {
+    static long skynet(long num, int size, int div) throws SuspendExecution, InterruptedException {
+        try {
+            if (size == 1)
+                return num;
 
-func skynet(c chan int, num int, size int, div int) {
-	if size == 1 {
-		c <- num
-		return
-	}
+            Fiber<Long>[] children = new Fiber[div];
+            long sum = 0;
+            for (int i = 0; i < div; i++) {
+                long subNum = num + i*(size/div);
+                children[i] = new Fiber<>(() -> skynet(subNum, size/div, div)).start();
+            }
+            for (Fiber<Long> c : children)
+                sum += c.get();
+            return sum;
+        } catch (ExecutionException e) {
+            throw (RuntimeException) e.getCause();
+        }
+    }
 
-	rc := make(chan int)
-	var sum int
-	for i := 0; i < div; i++ {
-		subNum := num + i*(size/div)
-		go skynet(rc, subNum, size/div, div)
-	}
-	for i := 0; i < div; i++ {
-		sum += <-rc
-	}
-	c <- sum
-}
+    public static void main(String[] args) throws Exception {
+        for (int i=0; i < RUNS; i++) {
+            Instant start = Instant.now();
 
-func main() {
-	c := make(chan int)
-	start := time.Now()
-	go skynet(c, 0, 1000000, 10)
-	result := <-c
-	took := time.Since(start)
-	fmt.Printf("Result: %d in %d ms.\n", result, took.Nanoseconds()/1e6)
+            long result = new Fiber<>(() -> skynet(0, 1_000_000, 10)).start().get();
+
+            Duration took = Duration.between(start, Instant.now());
+            System.out.printf("Result: %d in %d ms.\n", result, took.toMillis());
+        }
+    }
+
+    static final int RUNS = 4;
 }
